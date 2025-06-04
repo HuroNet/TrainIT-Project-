@@ -126,7 +126,13 @@ exports.Prisma.EmpleadoScalarFieldEnum = {
   email: 'email',
   cargo: 'cargo',
   salario: 'salario',
-  creadoEn: 'creadoEn'
+  creadoEn: 'creadoEn',
+  departamentoId: 'departamentoId'
+};
+
+exports.Prisma.DepartamentoScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre'
 };
 
 exports.Prisma.SortOrder = {
@@ -141,7 +147,8 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Empleado: 'Empleado'
+  Empleado: 'Empleado',
+  Departamento: 'Departamento'
 };
 
 /**
