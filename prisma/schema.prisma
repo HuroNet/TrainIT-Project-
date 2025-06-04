@@ -16,4 +16,12 @@ model Empleado {
   cargo     String
   salario   Float
   creadoEn  DateTime @default(now())
+  departamentoId Int
+  departamento    Departamento  @relation(fields: [departamentoId], references: [id], onDelete: Cascade)
+}
+
+model Departamento {
+  id         Int        @id @default(autoincrement())
+  nombre     String
+  empleados  Empleado[]
 }

@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type Empleado = $Result.DefaultSelection<Prisma.$EmpleadoPayload>
+/**
+ * Model Departamento
+ * 
+ */
+export type Departamento = $Result.DefaultSelection<Prisma.$DepartamentoPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get empleado(): Prisma.EmpleadoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.departamento`: Exposes CRUD operations for the **Departamento** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Departamentos
+    * const departamentos = await prisma.departamento.findMany()
+    * ```
+    */
+  get departamento(): Prisma.DepartamentoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Empleado: 'Empleado'
+    Empleado: 'Empleado',
+    Departamento: 'Departamento'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "empleado"
+      modelProps: "empleado" | "departamento"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.EmpleadoCountArgs<ExtArgs>
             result: $Utils.Optional<EmpleadoCountAggregateOutputType> | number
+          }
+        }
+      }
+      Departamento: {
+        payload: Prisma.$DepartamentoPayload<ExtArgs>
+        fields: Prisma.DepartamentoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DepartamentoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DepartamentoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>
+          }
+          findFirst: {
+            args: Prisma.DepartamentoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DepartamentoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>
+          }
+          findMany: {
+            args: Prisma.DepartamentoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>[]
+          }
+          create: {
+            args: Prisma.DepartamentoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>
+          }
+          createMany: {
+            args: Prisma.DepartamentoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DepartamentoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>[]
+          }
+          delete: {
+            args: Prisma.DepartamentoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>
+          }
+          update: {
+            args: Prisma.DepartamentoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>
+          }
+          deleteMany: {
+            args: Prisma.DepartamentoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DepartamentoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DepartamentoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>[]
+          }
+          upsert: {
+            args: Prisma.DepartamentoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartamentoPayload>
+          }
+          aggregate: {
+            args: Prisma.DepartamentoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartamento>
+          }
+          groupBy: {
+            args: Prisma.DepartamentoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartamentoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DepartamentoCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartamentoCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     empleado?: EmpleadoOmit
+    departamento?: DepartamentoOmit
   }
 
   /* Types for Logging */
@@ -864,6 +955,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type DepartamentoCountOutputType
+   */
+
+  export type DepartamentoCountOutputType = {
+    empleados: number
+  }
+
+  export type DepartamentoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    empleados?: boolean | DepartamentoCountOutputTypeCountEmpleadosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DepartamentoCountOutputType without action
+   */
+  export type DepartamentoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartamentoCountOutputType
+     */
+    select?: DepartamentoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DepartamentoCountOutputType without action
+   */
+  export type DepartamentoCountOutputTypeCountEmpleadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmpleadoWhereInput
+  }
+
 
   /**
    * Models
@@ -884,11 +1005,13 @@ export namespace Prisma {
   export type EmpleadoAvgAggregateOutputType = {
     id: number | null
     salario: number | null
+    departamentoId: number | null
   }
 
   export type EmpleadoSumAggregateOutputType = {
     id: number | null
     salario: number | null
+    departamentoId: number | null
   }
 
   export type EmpleadoMinAggregateOutputType = {
@@ -898,6 +1021,7 @@ export namespace Prisma {
     cargo: string | null
     salario: number | null
     creadoEn: Date | null
+    departamentoId: number | null
   }
 
   export type EmpleadoMaxAggregateOutputType = {
@@ -907,6 +1031,7 @@ export namespace Prisma {
     cargo: string | null
     salario: number | null
     creadoEn: Date | null
+    departamentoId: number | null
   }
 
   export type EmpleadoCountAggregateOutputType = {
@@ -916,6 +1041,7 @@ export namespace Prisma {
     cargo: number
     salario: number
     creadoEn: number
+    departamentoId: number
     _all: number
   }
 
@@ -923,11 +1049,13 @@ export namespace Prisma {
   export type EmpleadoAvgAggregateInputType = {
     id?: true
     salario?: true
+    departamentoId?: true
   }
 
   export type EmpleadoSumAggregateInputType = {
     id?: true
     salario?: true
+    departamentoId?: true
   }
 
   export type EmpleadoMinAggregateInputType = {
@@ -937,6 +1065,7 @@ export namespace Prisma {
     cargo?: true
     salario?: true
     creadoEn?: true
+    departamentoId?: true
   }
 
   export type EmpleadoMaxAggregateInputType = {
@@ -946,6 +1075,7 @@ export namespace Prisma {
     cargo?: true
     salario?: true
     creadoEn?: true
+    departamentoId?: true
   }
 
   export type EmpleadoCountAggregateInputType = {
@@ -955,6 +1085,7 @@ export namespace Prisma {
     cargo?: true
     salario?: true
     creadoEn?: true
+    departamentoId?: true
     _all?: true
   }
 
@@ -1051,6 +1182,7 @@ export namespace Prisma {
     cargo: string
     salario: number
     creadoEn: Date
+    departamentoId: number
     _count: EmpleadoCountAggregateOutputType | null
     _avg: EmpleadoAvgAggregateOutputType | null
     _sum: EmpleadoSumAggregateOutputType | null
@@ -1079,6 +1211,8 @@ export namespace Prisma {
     cargo?: boolean
     salario?: boolean
     creadoEn?: boolean
+    departamentoId?: boolean
+    departamento?: boolean | DepartamentoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["empleado"]>
 
   export type EmpleadoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1088,6 +1222,8 @@ export namespace Prisma {
     cargo?: boolean
     salario?: boolean
     creadoEn?: boolean
+    departamentoId?: boolean
+    departamento?: boolean | DepartamentoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["empleado"]>
 
   export type EmpleadoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1097,6 +1233,8 @@ export namespace Prisma {
     cargo?: boolean
     salario?: boolean
     creadoEn?: boolean
+    departamentoId?: boolean
+    departamento?: boolean | DepartamentoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["empleado"]>
 
   export type EmpleadoSelectScalar = {
@@ -1106,13 +1244,25 @@ export namespace Prisma {
     cargo?: boolean
     salario?: boolean
     creadoEn?: boolean
+    departamentoId?: boolean
   }
 
-  export type EmpleadoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "email" | "cargo" | "salario" | "creadoEn", ExtArgs["result"]["empleado"]>
+  export type EmpleadoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "email" | "cargo" | "salario" | "creadoEn" | "departamentoId", ExtArgs["result"]["empleado"]>
+  export type EmpleadoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departamento?: boolean | DepartamentoDefaultArgs<ExtArgs>
+  }
+  export type EmpleadoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departamento?: boolean | DepartamentoDefaultArgs<ExtArgs>
+  }
+  export type EmpleadoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departamento?: boolean | DepartamentoDefaultArgs<ExtArgs>
+  }
 
   export type $EmpleadoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Empleado"
-    objects: {}
+    objects: {
+      departamento: Prisma.$DepartamentoPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nombre: string
@@ -1120,6 +1270,7 @@ export namespace Prisma {
       cargo: string
       salario: number
       creadoEn: Date
+      departamentoId: number
     }, ExtArgs["result"]["empleado"]>
     composites: {}
   }
@@ -1514,6 +1665,7 @@ export namespace Prisma {
    */
   export interface Prisma__EmpleadoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    departamento<T extends DepartamentoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartamentoDefaultArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1549,6 +1701,7 @@ export namespace Prisma {
     readonly cargo: FieldRef<"Empleado", 'String'>
     readonly salario: FieldRef<"Empleado", 'Float'>
     readonly creadoEn: FieldRef<"Empleado", 'DateTime'>
+    readonly departamentoId: FieldRef<"Empleado", 'Int'>
   }
     
 
@@ -1565,6 +1718,10 @@ export namespace Prisma {
      * Omit specific fields from the Empleado
      */
     omit?: EmpleadoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
     /**
      * Filter, which Empleado to fetch.
      */
@@ -1584,6 +1741,10 @@ export namespace Prisma {
      */
     omit?: EmpleadoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
+    /**
      * Filter, which Empleado to fetch.
      */
     where: EmpleadoWhereUniqueInput
@@ -1601,6 +1762,10 @@ export namespace Prisma {
      * Omit specific fields from the Empleado
      */
     omit?: EmpleadoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
     /**
      * Filter, which Empleado to fetch.
      */
@@ -1650,6 +1815,10 @@ export namespace Prisma {
      */
     omit?: EmpleadoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
+    /**
      * Filter, which Empleado to fetch.
      */
     where?: EmpleadoWhereInput
@@ -1698,6 +1867,10 @@ export namespace Prisma {
      */
     omit?: EmpleadoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
+    /**
      * Filter, which Empleados to fetch.
      */
     where?: EmpleadoWhereInput
@@ -1741,6 +1914,10 @@ export namespace Prisma {
      */
     omit?: EmpleadoOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
+    /**
      * The data needed to create a Empleado.
      */
     data: XOR<EmpleadoCreateInput, EmpleadoUncheckedCreateInput>
@@ -1774,6 +1951,10 @@ export namespace Prisma {
      */
     data: EmpleadoCreateManyInput | EmpleadoCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1788,6 +1969,10 @@ export namespace Prisma {
      * Omit specific fields from the Empleado
      */
     omit?: EmpleadoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
     /**
      * The data needed to update a Empleado.
      */
@@ -1840,6 +2025,10 @@ export namespace Prisma {
      * Limit how many Empleados to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1854,6 +2043,10 @@ export namespace Prisma {
      * Omit specific fields from the Empleado
      */
     omit?: EmpleadoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
     /**
      * The filter to search for the Empleado to update in case it exists.
      */
@@ -1880,6 +2073,10 @@ export namespace Prisma {
      * Omit specific fields from the Empleado
      */
     omit?: EmpleadoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
     /**
      * Filter which Empleado to delete.
      */
@@ -1912,6 +2109,1075 @@ export namespace Prisma {
      * Omit specific fields from the Empleado
      */
     omit?: EmpleadoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Departamento
+   */
+
+  export type AggregateDepartamento = {
+    _count: DepartamentoCountAggregateOutputType | null
+    _avg: DepartamentoAvgAggregateOutputType | null
+    _sum: DepartamentoSumAggregateOutputType | null
+    _min: DepartamentoMinAggregateOutputType | null
+    _max: DepartamentoMaxAggregateOutputType | null
+  }
+
+  export type DepartamentoAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DepartamentoSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DepartamentoMinAggregateOutputType = {
+    id: number | null
+    nombre: string | null
+  }
+
+  export type DepartamentoMaxAggregateOutputType = {
+    id: number | null
+    nombre: string | null
+  }
+
+  export type DepartamentoCountAggregateOutputType = {
+    id: number
+    nombre: number
+    _all: number
+  }
+
+
+  export type DepartamentoAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type DepartamentoSumAggregateInputType = {
+    id?: true
+  }
+
+  export type DepartamentoMinAggregateInputType = {
+    id?: true
+    nombre?: true
+  }
+
+  export type DepartamentoMaxAggregateInputType = {
+    id?: true
+    nombre?: true
+  }
+
+  export type DepartamentoCountAggregateInputType = {
+    id?: true
+    nombre?: true
+    _all?: true
+  }
+
+  export type DepartamentoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departamento to aggregate.
+     */
+    where?: DepartamentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departamentos to fetch.
+     */
+    orderBy?: DepartamentoOrderByWithRelationInput | DepartamentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DepartamentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departamentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departamentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Departamentos
+    **/
+    _count?: true | DepartamentoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DepartamentoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DepartamentoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DepartamentoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DepartamentoMaxAggregateInputType
+  }
+
+  export type GetDepartamentoAggregateType<T extends DepartamentoAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartamento]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDepartamento[P]>
+      : GetScalarType<T[P], AggregateDepartamento[P]>
+  }
+
+
+
+
+  export type DepartamentoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartamentoWhereInput
+    orderBy?: DepartamentoOrderByWithAggregationInput | DepartamentoOrderByWithAggregationInput[]
+    by: DepartamentoScalarFieldEnum[] | DepartamentoScalarFieldEnum
+    having?: DepartamentoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DepartamentoCountAggregateInputType | true
+    _avg?: DepartamentoAvgAggregateInputType
+    _sum?: DepartamentoSumAggregateInputType
+    _min?: DepartamentoMinAggregateInputType
+    _max?: DepartamentoMaxAggregateInputType
+  }
+
+  export type DepartamentoGroupByOutputType = {
+    id: number
+    nombre: string
+    _count: DepartamentoCountAggregateOutputType | null
+    _avg: DepartamentoAvgAggregateOutputType | null
+    _sum: DepartamentoSumAggregateOutputType | null
+    _min: DepartamentoMinAggregateOutputType | null
+    _max: DepartamentoMaxAggregateOutputType | null
+  }
+
+  type GetDepartamentoGroupByPayload<T extends DepartamentoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DepartamentoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DepartamentoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DepartamentoGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartamentoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DepartamentoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+    empleados?: boolean | Departamento$empleadosArgs<ExtArgs>
+    _count?: boolean | DepartamentoCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["departamento"]>
+
+  export type DepartamentoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+  }, ExtArgs["result"]["departamento"]>
+
+  export type DepartamentoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+  }, ExtArgs["result"]["departamento"]>
+
+  export type DepartamentoSelectScalar = {
+    id?: boolean
+    nombre?: boolean
+  }
+
+  export type DepartamentoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre", ExtArgs["result"]["departamento"]>
+  export type DepartamentoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    empleados?: boolean | Departamento$empleadosArgs<ExtArgs>
+    _count?: boolean | DepartamentoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DepartamentoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DepartamentoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $DepartamentoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Departamento"
+    objects: {
+      empleados: Prisma.$EmpleadoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      nombre: string
+    }, ExtArgs["result"]["departamento"]>
+    composites: {}
+  }
+
+  type DepartamentoGetPayload<S extends boolean | null | undefined | DepartamentoDefaultArgs> = $Result.GetResult<Prisma.$DepartamentoPayload, S>
+
+  type DepartamentoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartamentoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartamentoCountAggregateInputType | true
+    }
+
+  export interface DepartamentoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Departamento'], meta: { name: 'Departamento' } }
+    /**
+     * Find zero or one Departamento that matches the filter.
+     * @param {DepartamentoFindUniqueArgs} args - Arguments to find a Departamento
+     * @example
+     * // Get one Departamento
+     * const departamento = await prisma.departamento.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DepartamentoFindUniqueArgs>(args: SelectSubset<T, DepartamentoFindUniqueArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Departamento that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DepartamentoFindUniqueOrThrowArgs} args - Arguments to find a Departamento
+     * @example
+     * // Get one Departamento
+     * const departamento = await prisma.departamento.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DepartamentoFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartamentoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Departamento that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartamentoFindFirstArgs} args - Arguments to find a Departamento
+     * @example
+     * // Get one Departamento
+     * const departamento = await prisma.departamento.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DepartamentoFindFirstArgs>(args?: SelectSubset<T, DepartamentoFindFirstArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Departamento that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartamentoFindFirstOrThrowArgs} args - Arguments to find a Departamento
+     * @example
+     * // Get one Departamento
+     * const departamento = await prisma.departamento.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DepartamentoFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartamentoFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Departamentos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartamentoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Departamentos
+     * const departamentos = await prisma.departamento.findMany()
+     * 
+     * // Get first 10 Departamentos
+     * const departamentos = await prisma.departamento.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const departamentoWithIdOnly = await prisma.departamento.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DepartamentoFindManyArgs>(args?: SelectSubset<T, DepartamentoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Departamento.
+     * @param {DepartamentoCreateArgs} args - Arguments to create a Departamento.
+     * @example
+     * // Create one Departamento
+     * const Departamento = await prisma.departamento.create({
+     *   data: {
+     *     // ... data to create a Departamento
+     *   }
+     * })
+     * 
+     */
+    create<T extends DepartamentoCreateArgs>(args: SelectSubset<T, DepartamentoCreateArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Departamentos.
+     * @param {DepartamentoCreateManyArgs} args - Arguments to create many Departamentos.
+     * @example
+     * // Create many Departamentos
+     * const departamento = await prisma.departamento.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DepartamentoCreateManyArgs>(args?: SelectSubset<T, DepartamentoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Departamentos and returns the data saved in the database.
+     * @param {DepartamentoCreateManyAndReturnArgs} args - Arguments to create many Departamentos.
+     * @example
+     * // Create many Departamentos
+     * const departamento = await prisma.departamento.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Departamentos and only return the `id`
+     * const departamentoWithIdOnly = await prisma.departamento.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DepartamentoCreateManyAndReturnArgs>(args?: SelectSubset<T, DepartamentoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Departamento.
+     * @param {DepartamentoDeleteArgs} args - Arguments to delete one Departamento.
+     * @example
+     * // Delete one Departamento
+     * const Departamento = await prisma.departamento.delete({
+     *   where: {
+     *     // ... filter to delete one Departamento
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DepartamentoDeleteArgs>(args: SelectSubset<T, DepartamentoDeleteArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Departamento.
+     * @param {DepartamentoUpdateArgs} args - Arguments to update one Departamento.
+     * @example
+     * // Update one Departamento
+     * const departamento = await prisma.departamento.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DepartamentoUpdateArgs>(args: SelectSubset<T, DepartamentoUpdateArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Departamentos.
+     * @param {DepartamentoDeleteManyArgs} args - Arguments to filter Departamentos to delete.
+     * @example
+     * // Delete a few Departamentos
+     * const { count } = await prisma.departamento.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DepartamentoDeleteManyArgs>(args?: SelectSubset<T, DepartamentoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departamentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartamentoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Departamentos
+     * const departamento = await prisma.departamento.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DepartamentoUpdateManyArgs>(args: SelectSubset<T, DepartamentoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departamentos and returns the data updated in the database.
+     * @param {DepartamentoUpdateManyAndReturnArgs} args - Arguments to update many Departamentos.
+     * @example
+     * // Update many Departamentos
+     * const departamento = await prisma.departamento.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Departamentos and only return the `id`
+     * const departamentoWithIdOnly = await prisma.departamento.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DepartamentoUpdateManyAndReturnArgs>(args: SelectSubset<T, DepartamentoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Departamento.
+     * @param {DepartamentoUpsertArgs} args - Arguments to update or create a Departamento.
+     * @example
+     * // Update or create a Departamento
+     * const departamento = await prisma.departamento.upsert({
+     *   create: {
+     *     // ... data to create a Departamento
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Departamento we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DepartamentoUpsertArgs>(args: SelectSubset<T, DepartamentoUpsertArgs<ExtArgs>>): Prisma__DepartamentoClient<$Result.GetResult<Prisma.$DepartamentoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Departamentos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartamentoCountArgs} args - Arguments to filter Departamentos to count.
+     * @example
+     * // Count the number of Departamentos
+     * const count = await prisma.departamento.count({
+     *   where: {
+     *     // ... the filter for the Departamentos we want to count
+     *   }
+     * })
+    **/
+    count<T extends DepartamentoCountArgs>(
+      args?: Subset<T, DepartamentoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DepartamentoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Departamento.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartamentoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DepartamentoAggregateArgs>(args: Subset<T, DepartamentoAggregateArgs>): Prisma.PrismaPromise<GetDepartamentoAggregateType<T>>
+
+    /**
+     * Group by Departamento.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartamentoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DepartamentoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DepartamentoGroupByArgs['orderBy'] }
+        : { orderBy?: DepartamentoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DepartamentoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartamentoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Departamento model
+   */
+  readonly fields: DepartamentoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Departamento.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DepartamentoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    empleados<T extends Departamento$empleadosArgs<ExtArgs> = {}>(args?: Subset<T, Departamento$empleadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpleadoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Departamento model
+   */
+  interface DepartamentoFieldRefs {
+    readonly id: FieldRef<"Departamento", 'Int'>
+    readonly nombre: FieldRef<"Departamento", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Departamento findUnique
+   */
+  export type DepartamentoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Departamento to fetch.
+     */
+    where: DepartamentoWhereUniqueInput
+  }
+
+  /**
+   * Departamento findUniqueOrThrow
+   */
+  export type DepartamentoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Departamento to fetch.
+     */
+    where: DepartamentoWhereUniqueInput
+  }
+
+  /**
+   * Departamento findFirst
+   */
+  export type DepartamentoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Departamento to fetch.
+     */
+    where?: DepartamentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departamentos to fetch.
+     */
+    orderBy?: DepartamentoOrderByWithRelationInput | DepartamentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departamentos.
+     */
+    cursor?: DepartamentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departamentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departamentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departamentos.
+     */
+    distinct?: DepartamentoScalarFieldEnum | DepartamentoScalarFieldEnum[]
+  }
+
+  /**
+   * Departamento findFirstOrThrow
+   */
+  export type DepartamentoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Departamento to fetch.
+     */
+    where?: DepartamentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departamentos to fetch.
+     */
+    orderBy?: DepartamentoOrderByWithRelationInput | DepartamentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departamentos.
+     */
+    cursor?: DepartamentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departamentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departamentos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departamentos.
+     */
+    distinct?: DepartamentoScalarFieldEnum | DepartamentoScalarFieldEnum[]
+  }
+
+  /**
+   * Departamento findMany
+   */
+  export type DepartamentoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * Filter, which Departamentos to fetch.
+     */
+    where?: DepartamentoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departamentos to fetch.
+     */
+    orderBy?: DepartamentoOrderByWithRelationInput | DepartamentoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Departamentos.
+     */
+    cursor?: DepartamentoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departamentos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departamentos.
+     */
+    skip?: number
+    distinct?: DepartamentoScalarFieldEnum | DepartamentoScalarFieldEnum[]
+  }
+
+  /**
+   * Departamento create
+   */
+  export type DepartamentoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Departamento.
+     */
+    data: XOR<DepartamentoCreateInput, DepartamentoUncheckedCreateInput>
+  }
+
+  /**
+   * Departamento createMany
+   */
+  export type DepartamentoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Departamentos.
+     */
+    data: DepartamentoCreateManyInput | DepartamentoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Departamento createManyAndReturn
+   */
+  export type DepartamentoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Departamentos.
+     */
+    data: DepartamentoCreateManyInput | DepartamentoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Departamento update
+   */
+  export type DepartamentoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Departamento.
+     */
+    data: XOR<DepartamentoUpdateInput, DepartamentoUncheckedUpdateInput>
+    /**
+     * Choose, which Departamento to update.
+     */
+    where: DepartamentoWhereUniqueInput
+  }
+
+  /**
+   * Departamento updateMany
+   */
+  export type DepartamentoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Departamentos.
+     */
+    data: XOR<DepartamentoUpdateManyMutationInput, DepartamentoUncheckedUpdateManyInput>
+    /**
+     * Filter which Departamentos to update
+     */
+    where?: DepartamentoWhereInput
+    /**
+     * Limit how many Departamentos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Departamento updateManyAndReturn
+   */
+  export type DepartamentoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * The data used to update Departamentos.
+     */
+    data: XOR<DepartamentoUpdateManyMutationInput, DepartamentoUncheckedUpdateManyInput>
+    /**
+     * Filter which Departamentos to update
+     */
+    where?: DepartamentoWhereInput
+    /**
+     * Limit how many Departamentos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Departamento upsert
+   */
+  export type DepartamentoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Departamento to update in case it exists.
+     */
+    where: DepartamentoWhereUniqueInput
+    /**
+     * In case the Departamento found by the `where` argument doesn't exist, create a new Departamento with this data.
+     */
+    create: XOR<DepartamentoCreateInput, DepartamentoUncheckedCreateInput>
+    /**
+     * In case the Departamento was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DepartamentoUpdateInput, DepartamentoUncheckedUpdateInput>
+  }
+
+  /**
+   * Departamento delete
+   */
+  export type DepartamentoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
+    /**
+     * Filter which Departamento to delete.
+     */
+    where: DepartamentoWhereUniqueInput
+  }
+
+  /**
+   * Departamento deleteMany
+   */
+  export type DepartamentoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departamentos to delete
+     */
+    where?: DepartamentoWhereInput
+    /**
+     * Limit how many Departamentos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Departamento.empleados
+   */
+  export type Departamento$empleadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Empleado
+     */
+    select?: EmpleadoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Empleado
+     */
+    omit?: EmpleadoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmpleadoInclude<ExtArgs> | null
+    where?: EmpleadoWhereInput
+    orderBy?: EmpleadoOrderByWithRelationInput | EmpleadoOrderByWithRelationInput[]
+    cursor?: EmpleadoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmpleadoScalarFieldEnum | EmpleadoScalarFieldEnum[]
+  }
+
+  /**
+   * Departamento without action
+   */
+  export type DepartamentoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departamento
+     */
+    select?: DepartamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departamento
+     */
+    omit?: DepartamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartamentoInclude<ExtArgs> | null
   }
 
 
@@ -1935,10 +3201,19 @@ export namespace Prisma {
     email: 'email',
     cargo: 'cargo',
     salario: 'salario',
-    creadoEn: 'creadoEn'
+    creadoEn: 'creadoEn',
+    departamentoId: 'departamentoId'
   };
 
   export type EmpleadoScalarFieldEnum = (typeof EmpleadoScalarFieldEnum)[keyof typeof EmpleadoScalarFieldEnum]
+
+
+  export const DepartamentoScalarFieldEnum: {
+    id: 'id',
+    nombre: 'nombre'
+  };
+
+  export type DepartamentoScalarFieldEnum = (typeof DepartamentoScalarFieldEnum)[keyof typeof DepartamentoScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2031,6 +3306,8 @@ export namespace Prisma {
     cargo?: StringFilter<"Empleado"> | string
     salario?: FloatFilter<"Empleado"> | number
     creadoEn?: DateTimeFilter<"Empleado"> | Date | string
+    departamentoId?: IntFilter<"Empleado"> | number
+    departamento?: XOR<DepartamentoScalarRelationFilter, DepartamentoWhereInput>
   }
 
   export type EmpleadoOrderByWithRelationInput = {
@@ -2040,6 +3317,8 @@ export namespace Prisma {
     cargo?: SortOrder
     salario?: SortOrder
     creadoEn?: SortOrder
+    departamentoId?: SortOrder
+    departamento?: DepartamentoOrderByWithRelationInput
   }
 
   export type EmpleadoWhereUniqueInput = Prisma.AtLeast<{
@@ -2052,6 +3331,8 @@ export namespace Prisma {
     cargo?: StringFilter<"Empleado"> | string
     salario?: FloatFilter<"Empleado"> | number
     creadoEn?: DateTimeFilter<"Empleado"> | Date | string
+    departamentoId?: IntFilter<"Empleado"> | number
+    departamento?: XOR<DepartamentoScalarRelationFilter, DepartamentoWhereInput>
   }, "id" | "email">
 
   export type EmpleadoOrderByWithAggregationInput = {
@@ -2061,6 +3342,7 @@ export namespace Prisma {
     cargo?: SortOrder
     salario?: SortOrder
     creadoEn?: SortOrder
+    departamentoId?: SortOrder
     _count?: EmpleadoCountOrderByAggregateInput
     _avg?: EmpleadoAvgOrderByAggregateInput
     _max?: EmpleadoMaxOrderByAggregateInput
@@ -2078,6 +3360,49 @@ export namespace Prisma {
     cargo?: StringWithAggregatesFilter<"Empleado"> | string
     salario?: FloatWithAggregatesFilter<"Empleado"> | number
     creadoEn?: DateTimeWithAggregatesFilter<"Empleado"> | Date | string
+    departamentoId?: IntWithAggregatesFilter<"Empleado"> | number
+  }
+
+  export type DepartamentoWhereInput = {
+    AND?: DepartamentoWhereInput | DepartamentoWhereInput[]
+    OR?: DepartamentoWhereInput[]
+    NOT?: DepartamentoWhereInput | DepartamentoWhereInput[]
+    id?: IntFilter<"Departamento"> | number
+    nombre?: StringFilter<"Departamento"> | string
+    empleados?: EmpleadoListRelationFilter
+  }
+
+  export type DepartamentoOrderByWithRelationInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    empleados?: EmpleadoOrderByRelationAggregateInput
+  }
+
+  export type DepartamentoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: DepartamentoWhereInput | DepartamentoWhereInput[]
+    OR?: DepartamentoWhereInput[]
+    NOT?: DepartamentoWhereInput | DepartamentoWhereInput[]
+    nombre?: StringFilter<"Departamento"> | string
+    empleados?: EmpleadoListRelationFilter
+  }, "id">
+
+  export type DepartamentoOrderByWithAggregationInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    _count?: DepartamentoCountOrderByAggregateInput
+    _avg?: DepartamentoAvgOrderByAggregateInput
+    _max?: DepartamentoMaxOrderByAggregateInput
+    _min?: DepartamentoMinOrderByAggregateInput
+    _sum?: DepartamentoSumOrderByAggregateInput
+  }
+
+  export type DepartamentoScalarWhereWithAggregatesInput = {
+    AND?: DepartamentoScalarWhereWithAggregatesInput | DepartamentoScalarWhereWithAggregatesInput[]
+    OR?: DepartamentoScalarWhereWithAggregatesInput[]
+    NOT?: DepartamentoScalarWhereWithAggregatesInput | DepartamentoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Departamento"> | number
+    nombre?: StringWithAggregatesFilter<"Departamento"> | string
   }
 
   export type EmpleadoCreateInput = {
@@ -2086,6 +3411,7 @@ export namespace Prisma {
     cargo: string
     salario: number
     creadoEn?: Date | string
+    departamento: DepartamentoCreateNestedOneWithoutEmpleadosInput
   }
 
   export type EmpleadoUncheckedCreateInput = {
@@ -2095,6 +3421,7 @@ export namespace Prisma {
     cargo: string
     salario: number
     creadoEn?: Date | string
+    departamentoId: number
   }
 
   export type EmpleadoUpdateInput = {
@@ -2103,6 +3430,7 @@ export namespace Prisma {
     cargo?: StringFieldUpdateOperationsInput | string
     salario?: FloatFieldUpdateOperationsInput | number
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    departamento?: DepartamentoUpdateOneRequiredWithoutEmpleadosNestedInput
   }
 
   export type EmpleadoUncheckedUpdateInput = {
@@ -2112,6 +3440,7 @@ export namespace Prisma {
     cargo?: StringFieldUpdateOperationsInput | string
     salario?: FloatFieldUpdateOperationsInput | number
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    departamentoId?: IntFieldUpdateOperationsInput | number
   }
 
   export type EmpleadoCreateManyInput = {
@@ -2121,6 +3450,7 @@ export namespace Prisma {
     cargo: string
     salario: number
     creadoEn?: Date | string
+    departamentoId: number
   }
 
   export type EmpleadoUpdateManyMutationInput = {
@@ -2138,6 +3468,43 @@ export namespace Prisma {
     cargo?: StringFieldUpdateOperationsInput | string
     salario?: FloatFieldUpdateOperationsInput | number
     creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    departamentoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DepartamentoCreateInput = {
+    nombre: string
+    empleados?: EmpleadoCreateNestedManyWithoutDepartamentoInput
+  }
+
+  export type DepartamentoUncheckedCreateInput = {
+    id?: number
+    nombre: string
+    empleados?: EmpleadoUncheckedCreateNestedManyWithoutDepartamentoInput
+  }
+
+  export type DepartamentoUpdateInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    empleados?: EmpleadoUpdateManyWithoutDepartamentoNestedInput
+  }
+
+  export type DepartamentoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    empleados?: EmpleadoUncheckedUpdateManyWithoutDepartamentoNestedInput
+  }
+
+  export type DepartamentoCreateManyInput = {
+    id?: number
+    nombre: string
+  }
+
+  export type DepartamentoUpdateManyMutationInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartamentoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2188,6 +3555,11 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type DepartamentoScalarRelationFilter = {
+    is?: DepartamentoWhereInput
+    isNot?: DepartamentoWhereInput
+  }
+
   export type EmpleadoCountOrderByAggregateInput = {
     id?: SortOrder
     nombre?: SortOrder
@@ -2195,11 +3567,13 @@ export namespace Prisma {
     cargo?: SortOrder
     salario?: SortOrder
     creadoEn?: SortOrder
+    departamentoId?: SortOrder
   }
 
   export type EmpleadoAvgOrderByAggregateInput = {
     id?: SortOrder
     salario?: SortOrder
+    departamentoId?: SortOrder
   }
 
   export type EmpleadoMaxOrderByAggregateInput = {
@@ -2209,6 +3583,7 @@ export namespace Prisma {
     cargo?: SortOrder
     salario?: SortOrder
     creadoEn?: SortOrder
+    departamentoId?: SortOrder
   }
 
   export type EmpleadoMinOrderByAggregateInput = {
@@ -2218,11 +3593,13 @@ export namespace Prisma {
     cargo?: SortOrder
     salario?: SortOrder
     creadoEn?: SortOrder
+    departamentoId?: SortOrder
   }
 
   export type EmpleadoSumOrderByAggregateInput = {
     id?: SortOrder
     salario?: SortOrder
+    departamentoId?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2289,6 +3666,45 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type EmpleadoListRelationFilter = {
+    every?: EmpleadoWhereInput
+    some?: EmpleadoWhereInput
+    none?: EmpleadoWhereInput
+  }
+
+  export type EmpleadoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DepartamentoCountOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+  }
+
+  export type DepartamentoAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DepartamentoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+  }
+
+  export type DepartamentoMinOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+  }
+
+  export type DepartamentoSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DepartamentoCreateNestedOneWithoutEmpleadosInput = {
+    create?: XOR<DepartamentoCreateWithoutEmpleadosInput, DepartamentoUncheckedCreateWithoutEmpleadosInput>
+    connectOrCreate?: DepartamentoCreateOrConnectWithoutEmpleadosInput
+    connect?: DepartamentoWhereUniqueInput
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2305,12 +3721,62 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type DepartamentoUpdateOneRequiredWithoutEmpleadosNestedInput = {
+    create?: XOR<DepartamentoCreateWithoutEmpleadosInput, DepartamentoUncheckedCreateWithoutEmpleadosInput>
+    connectOrCreate?: DepartamentoCreateOrConnectWithoutEmpleadosInput
+    upsert?: DepartamentoUpsertWithoutEmpleadosInput
+    connect?: DepartamentoWhereUniqueInput
+    update?: XOR<XOR<DepartamentoUpdateToOneWithWhereWithoutEmpleadosInput, DepartamentoUpdateWithoutEmpleadosInput>, DepartamentoUncheckedUpdateWithoutEmpleadosInput>
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type EmpleadoCreateNestedManyWithoutDepartamentoInput = {
+    create?: XOR<EmpleadoCreateWithoutDepartamentoInput, EmpleadoUncheckedCreateWithoutDepartamentoInput> | EmpleadoCreateWithoutDepartamentoInput[] | EmpleadoUncheckedCreateWithoutDepartamentoInput[]
+    connectOrCreate?: EmpleadoCreateOrConnectWithoutDepartamentoInput | EmpleadoCreateOrConnectWithoutDepartamentoInput[]
+    createMany?: EmpleadoCreateManyDepartamentoInputEnvelope
+    connect?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+  }
+
+  export type EmpleadoUncheckedCreateNestedManyWithoutDepartamentoInput = {
+    create?: XOR<EmpleadoCreateWithoutDepartamentoInput, EmpleadoUncheckedCreateWithoutDepartamentoInput> | EmpleadoCreateWithoutDepartamentoInput[] | EmpleadoUncheckedCreateWithoutDepartamentoInput[]
+    connectOrCreate?: EmpleadoCreateOrConnectWithoutDepartamentoInput | EmpleadoCreateOrConnectWithoutDepartamentoInput[]
+    createMany?: EmpleadoCreateManyDepartamentoInputEnvelope
+    connect?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+  }
+
+  export type EmpleadoUpdateManyWithoutDepartamentoNestedInput = {
+    create?: XOR<EmpleadoCreateWithoutDepartamentoInput, EmpleadoUncheckedCreateWithoutDepartamentoInput> | EmpleadoCreateWithoutDepartamentoInput[] | EmpleadoUncheckedCreateWithoutDepartamentoInput[]
+    connectOrCreate?: EmpleadoCreateOrConnectWithoutDepartamentoInput | EmpleadoCreateOrConnectWithoutDepartamentoInput[]
+    upsert?: EmpleadoUpsertWithWhereUniqueWithoutDepartamentoInput | EmpleadoUpsertWithWhereUniqueWithoutDepartamentoInput[]
+    createMany?: EmpleadoCreateManyDepartamentoInputEnvelope
+    set?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    disconnect?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    delete?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    connect?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    update?: EmpleadoUpdateWithWhereUniqueWithoutDepartamentoInput | EmpleadoUpdateWithWhereUniqueWithoutDepartamentoInput[]
+    updateMany?: EmpleadoUpdateManyWithWhereWithoutDepartamentoInput | EmpleadoUpdateManyWithWhereWithoutDepartamentoInput[]
+    deleteMany?: EmpleadoScalarWhereInput | EmpleadoScalarWhereInput[]
+  }
+
+  export type EmpleadoUncheckedUpdateManyWithoutDepartamentoNestedInput = {
+    create?: XOR<EmpleadoCreateWithoutDepartamentoInput, EmpleadoUncheckedCreateWithoutDepartamentoInput> | EmpleadoCreateWithoutDepartamentoInput[] | EmpleadoUncheckedCreateWithoutDepartamentoInput[]
+    connectOrCreate?: EmpleadoCreateOrConnectWithoutDepartamentoInput | EmpleadoCreateOrConnectWithoutDepartamentoInput[]
+    upsert?: EmpleadoUpsertWithWhereUniqueWithoutDepartamentoInput | EmpleadoUpsertWithWhereUniqueWithoutDepartamentoInput[]
+    createMany?: EmpleadoCreateManyDepartamentoInputEnvelope
+    set?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    disconnect?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    delete?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    connect?: EmpleadoWhereUniqueInput | EmpleadoWhereUniqueInput[]
+    update?: EmpleadoUpdateWithWhereUniqueWithoutDepartamentoInput | EmpleadoUpdateWithWhereUniqueWithoutDepartamentoInput[]
+    updateMany?: EmpleadoUpdateManyWithWhereWithoutDepartamentoInput | EmpleadoUpdateManyWithWhereWithoutDepartamentoInput[]
+    deleteMany?: EmpleadoScalarWhereInput | EmpleadoScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -2421,6 +3887,131 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DepartamentoCreateWithoutEmpleadosInput = {
+    nombre: string
+  }
+
+  export type DepartamentoUncheckedCreateWithoutEmpleadosInput = {
+    id?: number
+    nombre: string
+  }
+
+  export type DepartamentoCreateOrConnectWithoutEmpleadosInput = {
+    where: DepartamentoWhereUniqueInput
+    create: XOR<DepartamentoCreateWithoutEmpleadosInput, DepartamentoUncheckedCreateWithoutEmpleadosInput>
+  }
+
+  export type DepartamentoUpsertWithoutEmpleadosInput = {
+    update: XOR<DepartamentoUpdateWithoutEmpleadosInput, DepartamentoUncheckedUpdateWithoutEmpleadosInput>
+    create: XOR<DepartamentoCreateWithoutEmpleadosInput, DepartamentoUncheckedCreateWithoutEmpleadosInput>
+    where?: DepartamentoWhereInput
+  }
+
+  export type DepartamentoUpdateToOneWithWhereWithoutEmpleadosInput = {
+    where?: DepartamentoWhereInput
+    data: XOR<DepartamentoUpdateWithoutEmpleadosInput, DepartamentoUncheckedUpdateWithoutEmpleadosInput>
+  }
+
+  export type DepartamentoUpdateWithoutEmpleadosInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartamentoUncheckedUpdateWithoutEmpleadosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EmpleadoCreateWithoutDepartamentoInput = {
+    nombre: string
+    email: string
+    cargo: string
+    salario: number
+    creadoEn?: Date | string
+  }
+
+  export type EmpleadoUncheckedCreateWithoutDepartamentoInput = {
+    id?: number
+    nombre: string
+    email: string
+    cargo: string
+    salario: number
+    creadoEn?: Date | string
+  }
+
+  export type EmpleadoCreateOrConnectWithoutDepartamentoInput = {
+    where: EmpleadoWhereUniqueInput
+    create: XOR<EmpleadoCreateWithoutDepartamentoInput, EmpleadoUncheckedCreateWithoutDepartamentoInput>
+  }
+
+  export type EmpleadoCreateManyDepartamentoInputEnvelope = {
+    data: EmpleadoCreateManyDepartamentoInput | EmpleadoCreateManyDepartamentoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmpleadoUpsertWithWhereUniqueWithoutDepartamentoInput = {
+    where: EmpleadoWhereUniqueInput
+    update: XOR<EmpleadoUpdateWithoutDepartamentoInput, EmpleadoUncheckedUpdateWithoutDepartamentoInput>
+    create: XOR<EmpleadoCreateWithoutDepartamentoInput, EmpleadoUncheckedCreateWithoutDepartamentoInput>
+  }
+
+  export type EmpleadoUpdateWithWhereUniqueWithoutDepartamentoInput = {
+    where: EmpleadoWhereUniqueInput
+    data: XOR<EmpleadoUpdateWithoutDepartamentoInput, EmpleadoUncheckedUpdateWithoutDepartamentoInput>
+  }
+
+  export type EmpleadoUpdateManyWithWhereWithoutDepartamentoInput = {
+    where: EmpleadoScalarWhereInput
+    data: XOR<EmpleadoUpdateManyMutationInput, EmpleadoUncheckedUpdateManyWithoutDepartamentoInput>
+  }
+
+  export type EmpleadoScalarWhereInput = {
+    AND?: EmpleadoScalarWhereInput | EmpleadoScalarWhereInput[]
+    OR?: EmpleadoScalarWhereInput[]
+    NOT?: EmpleadoScalarWhereInput | EmpleadoScalarWhereInput[]
+    id?: IntFilter<"Empleado"> | number
+    nombre?: StringFilter<"Empleado"> | string
+    email?: StringFilter<"Empleado"> | string
+    cargo?: StringFilter<"Empleado"> | string
+    salario?: FloatFilter<"Empleado"> | number
+    creadoEn?: DateTimeFilter<"Empleado"> | Date | string
+    departamentoId?: IntFilter<"Empleado"> | number
+  }
+
+  export type EmpleadoCreateManyDepartamentoInput = {
+    id?: number
+    nombre: string
+    email: string
+    cargo: string
+    salario: number
+    creadoEn?: Date | string
+  }
+
+  export type EmpleadoUpdateWithoutDepartamentoInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    cargo?: StringFieldUpdateOperationsInput | string
+    salario?: FloatFieldUpdateOperationsInput | number
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmpleadoUncheckedUpdateWithoutDepartamentoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    cargo?: StringFieldUpdateOperationsInput | string
+    salario?: FloatFieldUpdateOperationsInput | number
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmpleadoUncheckedUpdateManyWithoutDepartamentoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    cargo?: StringFieldUpdateOperationsInput | string
+    salario?: FloatFieldUpdateOperationsInput | number
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
