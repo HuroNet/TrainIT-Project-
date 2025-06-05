@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateDepartamentoDto } from './dto/update-departamento.dto';
 
 @Injectable()
 export class DepartamentoService {
@@ -24,7 +25,7 @@ export class DepartamentoService {
     });
   }
 
-  update(id: number, data: { nombre: string }) {
+  update(id: number, data: UpdateDepartamentoDto) {
     return this.prisma.departamento.update({
       where: { id },
       data,
